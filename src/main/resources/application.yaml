@@ -1,0 +1,15 @@
+spring:
+  kafka:
+    bootstrap-servers: localhost:9092
+    consumer:
+      key-deserializer: org.apache.kafka.common.serialization.FloatDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.FloatDeserializer
+      group-id: stock_gid
+
+logging:
+  level:
+    ROOT:
+      info
+
+server:
+  port: 8091
