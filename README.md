@@ -11,12 +11,19 @@ The other service "Finance-Data-Svc" produces the stocks data
     ````
    docker-compose -f Kafka-dockercompose.yml up
    ````
-2. Run the spring boot service
-3. Monitor the logs of this service
-4. Start Finance-Data-Svc and cURL its endpoint to generate a stock value (see its README.md for how-to)
-5. Notice the log here showing the consumed value such as
-    ````
-    2020-12-21 00:09:12.440  INFO 20879 --- [ntainer#0-0-C-1] o.s.k.l.KafkaMessageListenerContainer    : stock_gid: partitions assigned: [stocks-0]
-    2020-12-21 00:09:27.498  INFO 20879 --- [ntainer#0-0-C-1] c.k.f.service.impl.FinanceServiceImpl    : Stock value received: 19.223568
-    2020-12-21 00:09:31.069  INFO 20879 --- [ntainer#0-0-C-1] c.k.f.service.impl.FinanceServiceImpl    : Stock value received: 19.566456
-    ````
+   
+2. Ensure PostgreSQL database is started (see file DB-postgres.sql in Docker dir)
+3. Run the spring boot service
+4. Monitor the logs of this service
+5. Start Finance-Data-Svc and cURL its endpoint to generate a stock value (see its README.md for how-to)
+6. Notice the log here showing the consumed value such as
+   ````
+   2020-12-22 22:52:02.519  INFO 18970 --- [ntainer#0-0-C-1] c.k.f.service.impl.FinanceServiceImpl    : Stock value received: StockDto(name=FAKESTOCK.Z, value=18.671613650505137)
+   2020-12-22 22:52:02.528  INFO 18970 --- [ntainer#0-0-C-1] c.k.f.service.impl.FinanceServiceImpl    : Stock saved in history_stocks DB
+   ````
+   
+   At this step any generated stock value is saved in the PostgreSQL DB for historical purposes. 
+7. To obtain the complete list of historical values (in descending order), use the following curl
+   ````
+   curl -i -H "Content-Type: application/json" "localhost:8091/history?stockName=FAKESTOCK.Z"
+   ````

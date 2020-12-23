@@ -2,9 +2,12 @@ spring:
   kafka:
     bootstrap-servers: localhost:9092
     consumer:
-      key-deserializer: org.apache.kafka.common.serialization.FloatDeserializer
-      value-deserializer: org.apache.kafka.common.serialization.FloatDeserializer
+      value-deserializer: com.kevvlvl.financeapi.deserializer.StockDeserializer
       group-id: stock_gid
+  datasource:
+    username: postgres
+    password: stocks1234
+    url: jdbc:postgresql://localhost:5432/postgres
 
 logging:
   level:
