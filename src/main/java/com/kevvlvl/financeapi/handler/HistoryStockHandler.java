@@ -26,6 +26,6 @@ public class HistoryStockHandler {
         Optional<String> stockName = request.queryParam("stockName");
 
         return ServerResponse.ok().contentType(MediaType.APPLICATION_JSON)
-                .body(BodyInserters.fromValue(service.getHistory(stockName.orElse(""))));
+                .body(BodyInserters.fromValue(service.getHistory(stockName.orElseThrow())));
     }
 }

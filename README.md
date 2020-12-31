@@ -14,7 +14,7 @@ The other service "Finance-Data-Svc" produces the stocks data
    docker-compose -f Kafka-dockercompose.yml up
    ````
    
-2. Ensure PostgreSQL database is started (see file DB-postgres.sql in Docker dir)
+2. Ensure PostgreSQL database is started (see file DB-postgres.sql in Docker dir) and run the Database-Init-Scripts if it's the first time creating this DB
 3. Run the spring boot service
 4. Monitor the logs of this service
 5. Start Finance-Data-Svc and cURL its endpoint to generate a stock value (see its README.md for how-to)
